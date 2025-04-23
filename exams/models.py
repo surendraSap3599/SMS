@@ -25,11 +25,13 @@ class MarksEntry(models.Model):
 class Result(models.Model):
     exam = models.ForeignKey(Exam, on_delete=models.CASCADE)
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    subject = models.ForeignKey(Subject, on_delete=models.CASCADE)
-    marks_obtained = models.DecimalField(max_digits=5, decimal_places=2)
+    total_marks = models.IntegerField(null=True)
+    percentage = models.DecimalField(max_digits=5, decimal_places=2)
+    rank = models.IntegerField(null=True)
     entered_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, limit_choices_to={'role': 'teacher'})
     finalized_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='finalized_results')
     is_finalized = models.BooleanField(default=False)
+    
 
     def __str__(self):
         return f"{self.student} - {self.exam} - {self.marks_obtained}"
