@@ -31,7 +31,6 @@ class Result(models.Model):
     entered_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, limit_choices_to={'role': 'teacher'})
     finalized_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='finalized_results')
     is_finalized = models.BooleanField(default=False)
-    
 
     def __str__(self):
         return f"{self.student} - {self.exam} - {self.marks_obtained}"
